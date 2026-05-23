@@ -163,55 +163,7 @@
             font-weight: 500;
         }
         
-        .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
-
-        /* Navigation Menu */
-        .nav-menu {
-            display: flex;
-            justify-content: center;
-            background-color: var(--secondary-color);
-        }
-        .nav-menu a, .dropbtn {
-            color: var(--white);
-            text-decoration: none;
-            padding: 10px 20px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.2s ease;
-        }
-        .nav-menu a:hover, .dropdown:hover .dropbtn {
-            background-color: rgba(255,255,255,0.1);
-            color: var(--accent-color);
-        }
-
-        /* Dropdown Structure */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--white);
-            min-width: 180px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-top: 3px solid var(--accent-color);
-        }
-        .dropdown-content a {
-            color: var(--text-color);
-            padding: 12px 16px;
-            display: block;
-            text-align: left;
-            border-bottom: 1px solid #edf2f7;
-        }
-        .dropdown-content a:hover {
-            background-color: #f8fafc;
-            color: var(--primary-color);
-            padding-left: 20px; /* Slight indent on hover */
-        }
-        .dropdown:hover .dropdown-content { display: block; }
+   
 
         /* --- MOBILE LAYOUT (Exactly 2 Lines) --- */
         @media (max-width: 768px) {
@@ -468,23 +420,6 @@
             <button class="menu-toggle" id="mobile-menu-btn">☰</button>
         </div>
     </div>
-
-    <nav id="main-nav" class="nav-menu">
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        
-        <div class="dropdown">
-            <button class="dropbtn">ACADEMICS <span>▼</span></button>
-            <div class="dropdown-content">
-                <a href="syllabus.html">Syllabus</a>
-                <a href="facilities.html">Facilities</a>
-                <a href="uniform.html">Uniform</a>
-            </div>
-        </div>
-        
-        <a href="admission.html">ADMISSION</a>
-        <a href="fee.html">FEE</a>
-    </nav>
 </header>
 <div class="nav-container">
     <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation">☰ MENU</button>
