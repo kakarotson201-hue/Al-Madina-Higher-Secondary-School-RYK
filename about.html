@@ -34,7 +34,7 @@
             overflow-x: hidden;
         }
 
-        /* --- Header Top (Logo & Contact) --- */
+        /* --- Header Top (Logo Left, Contact Right) --- */
         header { 
             background-color: var(--primary-color); 
             color: var(--white); 
@@ -45,7 +45,7 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Pushes left and right sides apart */
             align-items: center;
             gap: 20px;
         }
@@ -70,8 +70,9 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #e2e8f0;
+            font-weight: 500;
         }
         .separator { color: rgba(255, 255, 255, 0.3); }
 
@@ -89,6 +90,7 @@
             margin: 0 auto;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
         nav a { 
@@ -105,17 +107,61 @@
             color: var(--accent-color); 
         }
 
+        /* --- Dropdown Menu Styles --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            color: var(--white);
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .dropbtn span { font-size: 0.8rem; }
+
+        .dropdown:hover .dropbtn {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--accent-color);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--primary-color);
+            min-width: 180px;
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            border-radius: 0 0 8px 8px;
+            top: 100%;
+            left: 0;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            padding: 12px 20px;
+            display: block;
+            text-align: left;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown:hover .dropdown-content { display: block; }
+
         /* Mobile Menu Button */
         .menu-toggle {
             display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            padding: 10px 20px;
-            cursor: pointer;
-            width: 100%;
-            text-align: right;
         }
 
         /* --- Page Header --- */
@@ -198,12 +244,11 @@
             .separator { display: none; }
         }
 
- /* --- PREMIUM APP-STYLE MOBILE RESPONSIVENESS --- */
+        /* --- PREMIUM APP-STYLE MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-            /* 1. Hide the old bulky menu button completely */
             .menu-toggle { display: none !important; }
 
-            /* 2. Floating Frosted-Glass Bottom Navigation */
+            /* Floating Frosted-Glass Bottom Navigation */
             nav {
                 display: flex !important;
                 flex-direction: row;
@@ -211,23 +256,23 @@
                 bottom: 25px;
                 left: 5%;
                 width: 90%;
-                background: rgba(26, 54, 93, 0.75); /* Translucent primary color */
-                backdrop-filter: blur(16px); /* Cinematic frosted glass effect */
+                background: rgba(26, 54, 93, 0.75); 
+                backdrop-filter: blur(16px); 
                 -webkit-backdrop-filter: blur(16px);
                 border: 1px solid rgba(255, 255, 255, 0.15);
-                border-radius: 40px; /* Pill shape */
-                overflow-x: auto; /* Allows swiping left/right through links */
+                border-radius: 40px; 
+                overflow-x: auto; 
+                overflow-y: visible;
                 padding: 8px 15px;
                 box-shadow: 0 20px 40px rgba(0,0,0,0.4);
                 z-index: 9999;
                 
-                /* Hide scrollbar for a clean look */
                 scrollbar-width: none; 
                 -ms-overflow-style: none;
             }
             nav::-webkit-scrollbar { display: none; }
             
-            nav a {
+            nav a, .dropbtn {
                 padding: 12px 20px;
                 font-size: 0.85rem;
                 font-weight: 700;
@@ -237,14 +282,27 @@
                 color: #e2e8f0;
             }
             
-            /* Highlight the active/hover state with the accent color */
-            nav a:hover, nav a:active {
+            nav a:hover, nav a:active, .dropdown:hover .dropbtn {
                 background: var(--accent-color);
                 color: var(--white);
                 box-shadow: 0 4px 10px rgba(237, 137, 54, 0.4);
             }
 
-            /* 3. Cinematic Header Gradient */
+            /* Adjust Dropdown to open UPWARDS on Mobile */
+            .dropdown-content {
+                top: auto;
+                bottom: 120%;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 12px;
+                background: rgba(26, 54, 93, 0.95);
+                backdrop-filter: blur(10px);
+            }
+            .dropdown-content a {
+                border-radius: 0;
+            }
+
+            /* Cinematic Header Gradient */
             header {
                 background: linear-gradient(135deg, #0f2040 0%, var(--primary-color) 100%);
                 padding: 2rem 5%;
@@ -252,12 +310,10 @@
             .header-text h1 { font-size: 1.8rem; letter-spacing: -0.5px; }
             .site-logo { width: 70px; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4)); }
 
-            /* 4. Offset content so the floating nav doesn't cover the footer */
             main { padding-bottom: 120px; }
             footer { padding-bottom: 150px; }
 
-            /* 5. Minimalist Content Cards */
-            .content-card, .feature-box, .facility-card, .form-card, .syllabus-card {
+            .content-card {
                 background: #ffffff;
                 border: none;
                 border-radius: 24px;
@@ -269,56 +325,45 @@
 </head>
 <body>
 
-<header class="compact-header">
-    <div class="header-main">
-        <div class="brand-left">
-            <img src="logo.png" alt="Al-Madina Logo" class="logo">
-            <div class="brand-name">
-                <h1>Al-Madina</h1>
-                <p>School & College</p>
+    <!-- Unified Header: Logo Left, Contact Right -->
+    <header>
+        <div class="header-container">
+            <div class="brand-section">
+                <img src="logo pic.png" alt="Al-Madina Logo" class="site-logo">
+                <div class="header-text">
+                    <h1>Al-Madina</h1>
+                    <p>School & College</p>
+                </div>
             </div>
-        </div>
 
-        <div class="header-right">
-            <div class="contact-compact">
+            <div class="header-contact">
                 <span>📞 0300-6723912</span>
-                <span class="sep">|</span>
+                <span class="separator">|</span>
                 <span>✉️ info@almadina.edu.pk</span>
             </div>
-            <button class="menu-toggle" id="mobile-menu-btn">☰</button>
         </div>
-    </div>
+    </header>
 
-    <nav id="main-nav" class="nav-menu">
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        
-        <div class="dropdown">
-            <button class="dropbtn">ACADEMICS <span>▼</span></button>
-            <div class="dropdown-content">
-                <a href="syllabus.html">Syllabus</a>
-                <a href="facilities.html">Facilities</a>
-                <a href="uniform.html">Uniform</a>
+    <!-- Unified Navigation Bar with Dropdown -->
+    <div class="nav-container">
+        <nav id="main-nav">
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT</a>
+            
+            <!-- Dropdown Menu -->
+            <div class="dropdown">
+                <button class="dropbtn">ACADEMICS <span>▼</span></button>
+                <div class="dropdown-content">
+                    <a href="syllabus.html">Syllabus</a>
+                    <a href="facilities.html">Facilities</a>
+                    <a href="uniform.html">Uniform</a>
+                </div>
             </div>
-        </div>
-        
-        <a href="admission.html">ADMISSION</a>
-        <a href="fee.html">FEE</a>
-    </nav>
-</header>
-
-<div class="nav-container">
-    <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation">☰ MENU</button>
-    <nav id="main-nav">
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="admission.html">ADMISSION</a>
-        <a href="fee.html">FEE</a>
-        <a href="facilities.html">FACILITIES</a>
-        <a href="syllabus.html">SYLLABUS</a>
-        <a href="uniform.html">UNIFORM</a>
-    </nav>
-</div>
+            
+            <a href="admission.html">ADMISSION</a>
+            <a href="fee.html">FEE</a>
+        </nav>
+    </div>
 
     <section class="page-header">
         <h2>About AMHSC</h2>
@@ -350,13 +395,6 @@
         <p class="copyright">&copy; 2026 Al-Madina. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const nav = document.getElementById('main-nav');
-
-        menuBtn.addEventListener('click', () => {
-            nav.classList.toggle('active');
-        });
-    </script>
 </body>
 </html>
+
